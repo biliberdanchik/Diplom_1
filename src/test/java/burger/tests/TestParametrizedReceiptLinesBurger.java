@@ -37,14 +37,17 @@ public class TestParametrizedReceiptLinesBurger {
         };
     }
 
+    //Моки для булки и ингредиента
     Bun bun = Mockito.mock(Bun.class);
     Ingredient ingredient = Mockito.mock(Ingredient.class);
 
     @Before
     public void createBurger() {
+        //Сборка бургера
         burger = new Burger();
         burger.setBuns(bun);
         burger.addIngredient(ingredient);
+        //Стабы для заполнения данных в чеке из параметров
         Mockito.when(bun.getName()).thenReturn(bunName);
         Mockito.when(ingredient.getType()).thenReturn(ingredientType);
         Mockito.when(ingredient.getName()).thenReturn(ingredientName);
@@ -55,7 +58,7 @@ public class TestParametrizedReceiptLinesBurger {
     public void checkingFormatRowsReceipt() {
         String receipt = burger.getReceipt();
         String[] linesReceipt = receipt.split(System.lineSeparator());
-
+        //Проверки корректности формирования текста строк в чеке
         assertEquals("Первая строка с булочкой содержит ошибку", String.format("(==== %s ====)", bunName), linesReceipt[0]);
         assertEquals("Строка ингредиента содержит ошибку", String.format("= %s %s =", ingredientType.toString().toLowerCase(), ingredientName), linesReceipt[1]);
         assertEquals("Вторая строка с булочкой содержит ошибку", String.format("(==== %s ====)", bunName), linesReceipt[2]);

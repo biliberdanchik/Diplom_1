@@ -42,6 +42,7 @@ public class TestCreationBurger {
 
     @Test
     public void checkingMoveIngredient() {
+        //Заполняем моками список ингредиентов
         burger.ingredients.add(ingredient);
         burger.ingredients.add(ingredient1);
         burger.ingredients.add(ingredient2);

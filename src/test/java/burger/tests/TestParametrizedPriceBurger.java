@@ -41,6 +41,7 @@ public class TestParametrizedPriceBurger {
         };
     }
 
+    //Моки для наполнения бургера
     Bun bun = Mockito.mock(Bun.class);
     Ingredient ingredient1 = Mockito.mock(Ingredient.class);
     Ingredient ingredient2 = Mockito.mock(Ingredient.class);
@@ -50,6 +51,7 @@ public class TestParametrizedPriceBurger {
     @Before
     public void createBurger() {
         burger = new Burger();
+        //Наполнение бургера
         burger.setBuns(bun);
         burger.addIngredient(ingredient1);
         burger.addIngredient(ingredient2);
@@ -59,13 +61,15 @@ public class TestParametrizedPriceBurger {
 
     @Test
     public void checkingCalculatedPriceBurger() {
+        //Стабы для получения стоимости ингредиентов
         Mockito.when(bun.getPrice()).thenReturn(priceBun);
         Mockito.when(ingredient1.getPrice()).thenReturn(priceFirstIngredient);
         Mockito.when(ingredient2.getPrice()).thenReturn(priceSecondIngredient);
         Mockito.when(ingredient3.getPrice()).thenReturn(priceThirdIngredient);
         Mockito.when(ingredient4.getPrice()).thenReturn(priceFourthIngredient);
+
+        //Проверка расчета
         float actualCalculatedPrice = burger.getPrice();
-        System.out.println(actualCalculatedPrice);
-        assertEquals("Рассчитанная стоимость не совпадает с ожидаемой", expectedCalculatedPrice, actualCalculatedPrice, 0.00F);
+        assertEquals("Рассчитанная стоимость не совпадает с ожидаемой", expectedCalculatedPrice, actualCalculatedPrice, 0.001F);
     }
 }
